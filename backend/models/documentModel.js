@@ -6,11 +6,14 @@ const documentSchema = new mongoose.Schema({
     ref: "Business",
     required: true,
   },
+  documentType: {
+    type: String,
+    enum: ["UtilityBill", "BankStatement", "BusinessLicense"],
+    required: true,
+  },
   documentName: { type: String, required: true },
   documentFile: { type: String, required: true },
   uploadDate: { type: Date, default: Date.now },
 });
 
-const Document = mongoose.model("Document", documentSchema);
-
-module.exports = Document;
+module.exports = mongoose.model("Document", documentSchema);

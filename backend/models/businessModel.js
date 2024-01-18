@@ -35,6 +35,7 @@ const businessSchema = new mongoose.Schema(
     categories: [{ type: String }],
     tags: [{ type: String }],
     services: [{ type: String }],
+    products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   },
   { timestamps: true }
 );

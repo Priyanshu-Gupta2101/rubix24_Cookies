@@ -100,7 +100,7 @@ router.delete(
   userDeleteController
 );
 
-//Verification
+//Email Verification
 router.post("/verify-email/:email/:code", verifyEmailController);
 
 router.post(

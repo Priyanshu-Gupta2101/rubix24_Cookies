@@ -1,5 +1,6 @@
 const JWT = require("jsonwebtoken");
 const User = require("../models/userModel.js");
+const Business = require("../models/businessModel.js");
 
 //Protected Routes token base
 const requireSignIn = async (req, res, next) => {
@@ -55,6 +56,27 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
+const isBusinessOwner = async (req, res, next) => {
+  const user = await Business.find({ adminUserId: req.user._id });
+  try {
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "UnAuthorized Access",
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(501).json({
+      success: false,
+      error,
+      message: "Error in business owner middelware",
+    });
+  }
+};
+
 const requireMasterAdminToken = async (req, res, next) => {
   const masterAdminToken = req.headers.masteradmintoken;
   // Verify the master admin token
@@ -82,4 +104,9 @@ const requireMasterAdminToken = async (req, res, next) => {
   }
 };
 
-module.exports = { requireSignIn, isAdmin, requireMasterAdminToken };
+module.exports = {
+  requireSignIn,
+  isAdmin,
+  requireMasterAdminToken,
+  isBusinessOwner,
+};

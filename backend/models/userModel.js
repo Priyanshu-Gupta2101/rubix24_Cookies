@@ -1,15 +1,5 @@
 const mongoose = require("mongoose");
-
-const emergencyContactSchema = new mongoose.Schema({
-  name: { type: String },
-  relationship: { type: String },
-  phone: { type: String },
-});
-
-const EmergencyContact = mongoose.model(
-  "EmergencyContact",
-  emergencyContactSchema
-);
+const EmergencyContact = require("./emergencyModel.js");
 
 const userSchema = new mongoose.Schema(
   {
@@ -51,7 +41,9 @@ const userSchema = new mongoose.Schema(
     emailVerificationCode: {
       type: String,
     },
-    emergencyContact: [EmergencyContact],
+    emergencyContact: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "EmergencyContact" },
+    ],
   },
   { timestamps: true }
 );

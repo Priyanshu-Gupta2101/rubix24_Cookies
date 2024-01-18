@@ -78,10 +78,26 @@ const generateSecretKey = () => {
   }
 };
 
+const sendVerificationCodeOnPhone = async (phone, verificationCode) => {
+  try {
+    await twilioClient.messages.create({
+      to: phone,
+      from: process.env.PHONE,
+      body: `Your verification code is: ${verificationCode}`,
+    });
+
+    res.status(200).json({ success: true, verificationCode });
+  } catch (error) {
+    console.error("Error verifying phone number:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   hashPassword,
   comparePassword,
   verifyEmailController,
   generateVerificationCode,
   generateSecretKey,
+  sendVerificationCodeOnPhone,
 };

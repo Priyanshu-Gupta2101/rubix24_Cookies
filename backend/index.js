@@ -1,7 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db.js");
+
 const authRoute = require("./routes/authRoute.js");
+const businessRoute = require("./routes/businessRoute.js");
+const documentRoute = require("./routes/documentRoute.js");
+const emergencyRoute = require("./routes/emergencyRoute.js");
+const productRoute = require("./routes/productRoute.js");
+const reviewRoute = require("./routes/reviewRoute.js");
+
 const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const { generateSecretKey } = require("./helpers/authHelper.js");
@@ -30,6 +37,16 @@ app.use(morgan("dev"));
 
 //routes
 app.use("/api/v1/auth", authRoute);
+//routes
+app.use("/api/v1/business", businessRoute);
+//routes
+app.use("/api/v1/document", documentRoute);
+//routes
+app.use("/api/v1/emergency", emergencyRoute);
+//routes
+app.use("/api/v1/product", productRoute);
+//routes
+app.use("/api/v1/review", reviewRoute);
 
 // Custom error handling middleware
 app.use((err, req, res, next) => {
