@@ -1,0 +1,46 @@
+.max-width {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.city_bg {
+  background-image: linear-gradient(rgb(189, 46, 238));
+}
+
+/* .rest_bg{*/
+/*    height: 100vh;*/
+/*    background: linear-gradient(*/
+/*            to bottom,*/
+/*            rgb(234, 200, 90) 1%,*/
+/*            rgb(255, 255, 255) 80%*/
+/*        !* rgba(25, 37, 40, 0.65) 20%,*/
+/*      rgba(168, 94, 158, 0) 100% *!*/
+/*    )*/
+/*    !*url('./images/sssynchroDev.png');*!*/
+/*} */
+
+.rest_bg {
+  display: block;
+  height: 100vh;
+}
+
+.absolute-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cur-po {
+  cursor: pointer;
+}
+
+.collection-title {
+  font-size: 30px;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  color: #dec83a;
+}

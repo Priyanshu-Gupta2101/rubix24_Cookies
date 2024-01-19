@@ -12,7 +12,7 @@ async function sendVerificationCode(email, code) {
       secure: true,
     });
 
-    const verificationLink = `${process.env.SERVER_URL}/verify-email/${email}/${code}`;
+    const verificationLink = `${process.env.CLIENT_URL}/verify-email/${email}/${code}`;
 
     const mail = await transporter.sendMail({
       from: process.env.USER,

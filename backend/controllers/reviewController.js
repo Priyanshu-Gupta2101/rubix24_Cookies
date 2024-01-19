@@ -5,16 +5,17 @@ const submitReviewWithRatings = async (req, res) => {
   try {
     const {
       type,
-      typeId,
       safetyRating = 0,
       honestyRating = 0,
       pricingRating = 0,
       reviewText,
     } = req.body;
 
+    const id = req.user._id;
+
     const newReview = new Review({
       type,
-      typeId,
+      typeId: id,
       safetyRating,
       honestyRating,
       pricingRating,
@@ -22,9 +23,19 @@ const submitReviewWithRatings = async (req, res) => {
     });
 
     const savedReview = await newReview.save();
-    res.status(201).json(savedReview);
+    res.status(201).json({ success: true, review: savedReview });
   } catch (error) {
     console.error("Error submitting review with ratings:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const getAllReviews = async (req, res) => {
+  try {
+    const reviews = await Review.find({});
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error("Error getting reviews:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -32,7 +43,9 @@ const submitReviewWithRatings = async (req, res) => {
 // Controller to get reviews for a user or business
 const getReviews = async (req, res) => {
   try {
-    const { typeId, type } = req.params;
+    const { type } = req.params;
+
+    const typeId = req.user._id;
 
     if (!["User", "Business"].includes(type)) {
       return res.status(400).json({ error: "Invalid type" });
@@ -73,6 +86,7 @@ const updateReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   try {
     const { reviewId } = req.params;
+    console.log(reviewId);
 
     const deletedReview = await Review.findByIdAndDelete(reviewId);
 
@@ -80,7 +94,9 @@ const deleteReview = async (req, res) => {
       return res.status(404).json({ error: "Review not found" });
     }
 
-    res.status(204).send();
+    res
+      .status(204)
+      .json({ success: true, message: "Review successfully deleted" });
   } catch (error) {
     console.error("Error deleting review:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -164,4 +180,5 @@ module.exports = {
   updateSafetyRating,
   updateHonestyRating,
   updatePricingRating,
+  getAllReviews,
 };

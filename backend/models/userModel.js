@@ -36,7 +36,6 @@ const userSchema = new mongoose.Schema(
       },
     },
     address: { type: String },
-    nationality: { type: String },
     isEmailVerified: { type: Boolean, default: false },
     emailVerificationCode: {
       type: String,

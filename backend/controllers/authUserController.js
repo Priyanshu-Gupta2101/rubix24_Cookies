@@ -13,6 +13,7 @@ const path = require("path");
 const registerController = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
+    console.log("HERe");
     //validations
 
     if (!name) {

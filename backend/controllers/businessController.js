@@ -1,5 +1,12 @@
 const Business = require("../models/businessModel.js");
 const User = require("../models/userModel.js");
+const cloudinary = require("../utils/cloudinary.js");
+
+const opts = {
+  overwrite: true,
+  invalidate: true,
+  resource_type: "auto",
+};
 
 const verifyBusiness = async (businessId) => {
   try {
@@ -31,10 +38,10 @@ const createBusiness = async (req, res) => {
       location,
       address,
       phone,
+      images,
       website,
       description,
       openingHours,
-      images,
       categories,
       tags,
       services,
@@ -57,15 +64,27 @@ const createBusiness = async (req, res) => {
       description,
       openingHours,
       adminUserId: userId,
-      images,
       categories,
       tags,
       services,
     });
 
+    for (const file of images) {
+      const result = await cloudinary.uploader.upload(file, opts, {
+        folder: "Rubix",
+      });
+
+      console.log(result);
+
+      newBusiness.images.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+
     const savedBusiness = await newBusiness.save();
 
-    res.status(201).json(savedBusiness);
+    res.status(201).json({ success: true, savedBusiness });
   } catch (error) {
     console.error("Error creating business:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -74,7 +93,7 @@ const createBusiness = async (req, res) => {
 
 const getAllBusinesses = async (req, res) => {
   try {
-    const businesses = await Business.find();
+    const businesses = await Business.find({});
 
     res.status(200).json(businesses);
   } catch (error) {

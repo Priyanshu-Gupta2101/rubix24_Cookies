@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db.js");
+const cors = require("cors");
 
 const authRoute = require("./routes/authRoute.js");
 const businessRoute = require("./routes/businessRoute.js");
@@ -32,6 +33,7 @@ const app = express();
 
 //middelwares
 app.use(limiter);
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -46,7 +48,7 @@ app.use("/api/v1/emergency", emergencyRoute);
 //routes
 app.use("/api/v1/product", productRoute);
 //routes
-app.use("/api/v1/review", reviewRoute);
+app.use("/api/v1/reviews", reviewRoute);
 
 // Custom error handling middleware
 app.use((err, req, res, next) => {

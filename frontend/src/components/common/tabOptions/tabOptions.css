@@ -1,0 +1,48 @@
+.tab-options{
+    box-shadow: white 0 px -0.5px 0 px inset;
+}
+
+.options-wrapper{
+    display:flex;
+}
+
+.tab-item{
+    margin-right: 24px;
+    padding: 12px 12px 0px 12px;
+}
+
+.btn-discover{
+    margin-top: 15px;
+    margin-left: 300px;
+    font-weight: bold;
+    color: #dac016;
+    background-color: #db2777;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.tab-name{
+    font-size:20px;
+    font-weight: 500;
+    margin-left: 10px;
+    color: #505569;
+}
+
+.tab-image-container{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.tab-image{
+    width: 30px;
+    height: 30px;
+}
+
+.active-tab{
+    border-bottom: 2px solid #efcb3b;
+}
+
+.active-tab .tab-name{
+    color: #efcb3b;
+}

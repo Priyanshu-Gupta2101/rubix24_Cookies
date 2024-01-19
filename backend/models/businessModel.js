@@ -7,11 +7,6 @@ const businessSchema = new mongoose.Schema(
     location: {
       type: {
         type: String,
-        enum: ["Point"],
-        required: true,
-      },
-      coordinates: {
-        type: [Number],
         required: true,
       },
     },
@@ -26,12 +21,20 @@ const businessSchema = new mongoose.Schema(
     website: { type: String },
     description: { type: String },
     openingHours: {
-      type: Map,
-      of: String,
+      type: String,
     },
     verified: { type: Boolean, default: false },
     adminUserId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    images: [{ type: String }],
+    images: [
+      {
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+    ],
     categories: [{ type: String }],
     tags: [{ type: String }],
     services: [{ type: String }],

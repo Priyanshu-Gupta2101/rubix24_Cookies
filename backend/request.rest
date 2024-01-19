@@ -1,1 +1,13 @@
-// Used to test the routes
+@for(var i = 0; i < 10; i++) {
+POST http://localhost:8080/api/v1/reviews/submit-with-ratings/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWE5NzhiZGEwYzg0N2RhZWE4OGViYTEiLCJpYXQiOjE3MDU2MDg0NzUsImV4cCI6MTcwNjIxMzI3NX0.P2eu5uC6hTTdB030muZ-VzBCgmltWMlUbyvlC2hXCJA
+
+{
+    "type":"User",
+  "safetyRating": 4,
+  "honestyRating": 5,
+  "pricingRating": 3,
+  "reviewText": "This is a great user!"
+}
+@}

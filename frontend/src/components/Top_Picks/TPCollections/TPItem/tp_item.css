@@ -1,0 +1,21 @@
+.tp-item-cover {
+  height: 190px;
+  width: 260px;
+  /*box-shadow: ;*/
+  border-radius: 8px;
+}
+
+.tp-item-image {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.tp-item-title {
+  font-size: 18px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 6px;
+}

@@ -7,20 +7,19 @@ const {
   updateSafetyRating,
   updateHonestyRating,
   updatePricingRating,
+  getAllReviews,
 } = require("../controllers/reviewController");
 const { requireSignIn } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 // Submit a new review with individual ratings
-router.post(
-  "/submit-with-ratings/:type/:typeId",
-  requireSignIn,
-  submitReviewWithRatings
-);
+router.post("/submit-with-ratings/", requireSignIn, submitReviewWithRatings);
+
+router.get("/all", getAllReviews);
 
 // Get reviews for a user or business
-router.get("/:type/:typeId", getReviews);
+router.get("/:type/", requireSignIn, getReviews);
 
 // Update a review
 router.put("/update/:reviewId", requireSignIn, updateReview);
